@@ -109,7 +109,7 @@ func logMessageDecode(d *Decoder, msgBuf *bytes.Buffer, msg Message, decodeErr e
 	w := bytes.NewBuffer(nil)
 	defer func() {
 		if d.contextLogger != nil {
-			d.contextLogger.Info(aws.BackgroundContext(), w.String())
+			d.contextLogger.Log(aws.BackgroundContext(), w.String())
 		} else if d.logger != nil {
 			d.logger.Log(w.String())
 		} else {

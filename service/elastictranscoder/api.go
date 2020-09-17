@@ -1489,7 +1489,7 @@ const opTestRole = "TestRole"
 func (c *ElasticTranscoder) TestRoleRequest(input *TestRoleInput) (req *request.Request, output *TestRoleOutput) {
 	msg := "This operation, TestRole, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {

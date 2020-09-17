@@ -172,7 +172,7 @@ func (w Waiter) WaitWithContext(ctx aws.Context) error {
 	for attempt := 1; ; attempt++ {
 		req, err := w.NewRequest(w.RequestOptions)
 		if err != nil {
-			logErrorf(ctx, &w, "unable to create request %v", err)
+			waiterLogf(ctx, &w, "unable to create request %v", err)
 			return err
 		}
 		req.Handlers.Build.PushBack(MakeAddToUserAgentFreeFormHandler("Waiter"))
@@ -261,7 +261,7 @@ func (a *WaiterAcceptor) match(ctx aws.Context, w *Waiter, req *Request, err err
 			result = aerr.Code() == a.Expected.(string)
 		}
 	default:
-		logWarningf(ctx, w, "Waiter %s encountered unexpected matcher: %s",
+		waiterLogf(ctx, w, "WARNING: Waiter %s encountered unexpected matcher: %s",
 			w.Name, a.Matcher)
 	}
 
@@ -283,27 +283,17 @@ func (a *WaiterAcceptor) match(ctx aws.Context, w *Waiter, req *Request, err err
 		// clear the error and retry the operation
 		return false, nil
 	default:
-		logWarningf(ctx, w, "Waiter %s encountered unexpected state: %s",
+		waiterLogf(ctx, w, "WARNING: Waiter %s encountered unexpected state: %s",
 			w.Name, a.State)
 		return false, nil
 	}
 }
 
-func logErrorf(ctx aws.Context, w *Waiter, msg string, args ...interface{}) {
+func waiterLogf(ctx aws.Context, w *Waiter, msg string, args ...interface{}) {
 	if w.ContextLogger != nil {
-		w.ContextLogger.Errorf(ctx, msg, args...)
+		w.ContextLogger.Logf(ctx, msg, args...)
 	} else if w.Logger != nil {
-		w.Logger.Log(fmt.Sprintf("ERROR: "+msg, args...))
-	} else {
-		// no-op
-	}
-}
-
-func logWarningf(ctx aws.Context, w *Waiter, msg string, args ...interface{}) {
-	if w.ContextLogger != nil {
-		w.ContextLogger.Warnf(ctx, msg, args...)
-	} else if w.Logger != nil {
-		w.Logger.Log(fmt.Sprintf("WARNING: "+msg, args...))
+		w.Logger.Log(fmt.Sprintf(msg, args...))
 	} else {
 		// no-op
 	}

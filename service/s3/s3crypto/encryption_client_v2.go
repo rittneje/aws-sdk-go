@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3/s3iface"
 )
 
-const customTypeWarningMessage = "The S3 Encryption Client is configured to write encrypted objects using types not provided by AWS. Security and compatibility with these types can not be guaranteed."
+const customTypeWarningMessage = "WARNING: The S3 Encryption Client is configured to write encrypted objects using types not provided by AWS. Security and compatibility with these types can not be guaranteed."
 
 // EncryptionClientV2 is an S3 crypto client. By default the SDK will use Authentication mode which
 // will use KMS for key wrapping and AES GCM for content encryption.
@@ -73,7 +73,7 @@ func NewEncryptionClientV2(prov client.ConfigProvider, contentCipherBuilder Cont
 
 	// Check if the passed in type is an fixture, if not log a warning message to the user
 	if fixture, ok := contentCipherBuilder.(awsFixture); !ok || !fixture.isAWSFixture() {
-		awslog.Warn(aws.BackgroundContext(), &s3client.Config, customTypeWarningMessage)
+		awslog.Log(aws.BackgroundContext(), &s3client.Config, customTypeWarningMessage)
 	}
 
 	client = &EncryptionClientV2{

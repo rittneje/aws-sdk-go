@@ -59,7 +59,7 @@ func New(cfg aws.Config, info metadata.ClientInfo, handlers request.Handlers, op
 	case ok:
 		svc.Retryer = retryer
 	case cfg.Retryer != nil && cfg.Logger != nil:
-		awslog.Warnf(aws.BackgroundContext(), &cfg, "%T does not implement request.Retryer; using DefaultRetryer instead", cfg.Retryer)
+		awslog.Logf(aws.BackgroundContext(), &cfg, "WARNING: %T does not implement request.Retryer; using DefaultRetryer instead", cfg.Retryer)
 		fallthrough
 	default:
 		maxRetries := aws.IntValue(cfg.MaxRetries)

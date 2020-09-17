@@ -438,8 +438,8 @@ func (d *downloader) downloadChunk(chunk dlchunk) error {
 		}
 
 		chunk.cur = 0
-		logMessage(d.ctx, d.cfg.S3, aws.LogDebugWithRequestRetries, awslog.Debugf,
-			"object part body download interrupted %s, err, %v, retrying attempt %d",
+		logMessage(d.ctx, d.cfg.S3, aws.LogDebugWithRequestRetries,
+			"DEBUG: object part body download interrupted %s, err, %v, retrying attempt %d",
 			aws.StringValue(in.Key), err, retry)
 	}
 
@@ -470,16 +470,14 @@ func (d *downloader) tryDownloadChunk(in *s3.GetObjectInput, w io.Writer) (int64
 	return n, nil
 }
 
-type logfFunc func(ctx aws.Context, c *aws.Config, format string, v ...interface{})
-
-func logMessage(ctx aws.Context, svc s3iface.S3API, level aws.LogLevelType, logfFunc logfFunc, format string, v ...interface{}) {
+func logMessage(ctx aws.Context, svc s3iface.S3API, level aws.LogLevelType, format string, v ...interface{}) {
 	s, ok := svc.(*s3.S3)
 	if !ok {
 		return
 	}
 
 	if s.Config.LogLevel.Matches(level) {
-		logfFunc(ctx, &s.Config, format, v...)
+		awslog.Logf(ctx, &s.Config, format, v...)
 	}
 }
 

@@ -173,7 +173,7 @@ func localHTTPCredProvider(cfg aws.Config, handlers request.Handlers, u string) 
 	}
 
 	if len(errMsg) > 0 {
-		awslog.Error(aws.BackgroundContext(), &cfg, "Ignoring, HTTP credential provider", errMsg, err)
+		awslog.Log(aws.BackgroundContext(), &cfg, "Ignoring, HTTP credential provider", errMsg, err)
 		return credentials.ErrorProvider{
 			Err:          awserr.New("CredentialsEndpointError", errMsg, err),
 			ProviderName: endpointcreds.ProviderName,

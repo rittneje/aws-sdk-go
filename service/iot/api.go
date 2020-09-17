@@ -505,7 +505,7 @@ const opAttachPrincipalPolicy = "AttachPrincipalPolicy"
 func (c *IoT) AttachPrincipalPolicyRequest(input *AttachPrincipalPolicyInput) (req *request.Request, output *AttachPrincipalPolicyOutput) {
 	msg := "This operation, AttachPrincipalPolicy, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {
@@ -9015,7 +9015,7 @@ const opDetachPrincipalPolicy = "DetachPrincipalPolicy"
 func (c *IoT) DetachPrincipalPolicyRequest(input *DetachPrincipalPolicyInput) (req *request.Request, output *DetachPrincipalPolicyOutput) {
 	msg := "This operation, DetachPrincipalPolicy, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {
@@ -13938,7 +13938,7 @@ const opListPolicyPrincipals = "ListPolicyPrincipals"
 func (c *IoT) ListPolicyPrincipalsRequest(input *ListPolicyPrincipalsInput) (req *request.Request, output *ListPolicyPrincipalsOutput) {
 	msg := "This operation, ListPolicyPrincipals, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {
@@ -14199,7 +14199,7 @@ const opListPrincipalPolicies = "ListPrincipalPolicies"
 func (c *IoT) ListPrincipalPoliciesRequest(input *ListPrincipalPoliciesInput) (req *request.Request, output *ListPrincipalPoliciesOutput) {
 	msg := "This operation, ListPrincipalPolicies, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {

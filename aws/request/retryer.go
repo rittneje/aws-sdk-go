@@ -39,7 +39,7 @@ type Retryer interface {
 // value for chaining. The value must not be nil.
 func WithRetryer(cfg *aws.Config, retryer Retryer) *aws.Config {
 	if retryer == nil {
-		awslog.Error(aws.BackgroundContext(), cfg, "Request.WithRetryer called with nil retryer. Replacing with retry disabled Retryer.")
+		awslog.Log(aws.BackgroundContext(), cfg, "ERROR: Request.WithRetryer called with nil retryer. Replacing with retry disabled Retryer.")
 		retryer = noOpRetryer{}
 	}
 	cfg.Retryer = retryer

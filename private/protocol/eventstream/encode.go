@@ -102,7 +102,7 @@ func logMessageEncode(e *Encoder, msgBuf *bytes.Buffer, msg Message, encodeErr e
 	w := bytes.NewBuffer(nil)
 	defer func() {
 		if e.contextLogger != nil {
-			e.contextLogger.Info(aws.BackgroundContext(), w.String())
+			e.contextLogger.Log(aws.BackgroundContext(), w.String())
 		} else if e.logger != nil {
 			e.logger.Log(w.String())
 		} else {

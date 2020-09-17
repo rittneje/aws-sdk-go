@@ -993,7 +993,7 @@ const opDescribeExportConfigurations = "DescribeExportConfigurations"
 func (c *ApplicationDiscoveryService) DescribeExportConfigurationsRequest(input *DescribeExportConfigurationsInput) (req *request.Request, output *DescribeExportConfigurationsOutput) {
 	msg := "This operation, DescribeExportConfigurations, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {
@@ -1555,7 +1555,7 @@ const opExportConfigurations = "ExportConfigurations"
 func (c *ApplicationDiscoveryService) ExportConfigurationsRequest(input *ExportConfigurationsInput) (req *request.Request, output *ExportConfigurationsOutput) {
 	msg := "This operation, ExportConfigurations, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {

@@ -794,7 +794,7 @@ const opDeleteSubscription = "DeleteSubscription"
 func (c *Shield) DeleteSubscriptionRequest(input *DeleteSubscriptionInput) (req *request.Request, output *DeleteSubscriptionOutput) {
 	msg := "This operation, DeleteSubscription, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {

@@ -109,7 +109,7 @@ func New(cfgs ...*aws.Config) *Session {
 	}
 
 	if csmCfg, err := loadCSMConfig(envCfg, []string{}); err != nil {
-		awslog.Errorf(aws.BackgroundContext(), s.Config, "failed to load CSM configuration, %v", err)
+		awslog.Logf(aws.BackgroundContext(), s.Config, "ERROR: failed to load CSM configuration, %v", err)
 	} else if csmCfg.Enabled {
 		err := enableCSM(&s.Handlers, csmCfg, s.Config)
 		if err != nil {
@@ -400,7 +400,7 @@ func deprecatedNewSession(envCfg envConfig, cfgs ...*aws.Config) *Session {
 }
 
 func enableCSM(handlers *request.Handlers, cfg csmConfig, config *aws.Config) error {
-	awslog.Info(aws.BackgroundContext(), config, "Enabling CSM")
+	awslog.Log(aws.BackgroundContext(), config, "Enabling CSM")
 
 	r, err := csm.Start(cfg.ClientID, csm.AddressWithDefaults(cfg.Host, cfg.Port))
 	if err != nil {
@@ -466,7 +466,7 @@ func newSession(opts Options, envCfg envConfig, cfgs ...*aws.Config) (*Session, 
 	initHandlers(s)
 
 	if csmCfg, err := loadCSMConfig(envCfg, cfgFiles); err != nil {
-		awslog.Errorf(aws.BackgroundContext(), s.Config, "failed to load CSM configuration, %v", err)
+		awslog.Logf(aws.BackgroundContext(), s.Config, "ERROR: failed to load CSM configuration, %v", err)
 	} else if csmCfg.Enabled {
 		err = enableCSM(&s.Handlers, csmCfg, s.Config)
 		if err != nil {
@@ -779,7 +779,7 @@ func (s *Session) logDeprecatedNewSessionError(msg string, err error, cfgs []*aw
 	// Session creation failed, need to report the error and prevent
 	// any requests from succeeding.
 	s.Config.MergeIn(cfgs...)
-	awslog.Error(aws.BackgroundContext(), s.Config, msg, "Error:", err)
+	awslog.Log(aws.BackgroundContext(), s.Config, "ERROR:", msg, "Error:", err)
 	s.Handlers.Validate.PushBack(func(r *request.Request) {
 		r.Error = err
 	})

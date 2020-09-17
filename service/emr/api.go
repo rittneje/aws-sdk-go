@@ -732,7 +732,7 @@ const opDescribeJobFlows = "DescribeJobFlows"
 func (c *EMR) DescribeJobFlowsRequest(input *DescribeJobFlowsInput) (req *request.Request, output *DescribeJobFlowsOutput) {
 	msg := "This operation, DescribeJobFlows, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {

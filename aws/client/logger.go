@@ -12,12 +12,12 @@ import (
 	"github.com/aws/aws-sdk-go/internal/awslog"
 )
 
-const logReqMsg = `Request %s/%s Details:
+const logReqMsg = `DEBUG: Request %s/%s Details:
 ---[ REQUEST POST-SIGN ]-----------------------------
 %s
 -----------------------------------------------------`
 
-const logReqErrMsg = `Request %s/%s:
+const logReqErrMsg = `DEBUG ERROR: Request %s/%s:
 ---[ REQUEST DUMP ERROR ]-----------------------------
 %s
 ------------------------------------------------------`
@@ -59,7 +59,7 @@ func logRequest(r *request.Request) {
 
 	b, err := httputil.DumpRequestOut(r.HTTPRequest, logBody)
 	if err != nil {
-		awslog.DebugErrorf(r.Context(), &r.Config, logReqErrMsg,
+		awslog.Logf(r.Context(), &r.Config, logReqErrMsg,
 			r.ClientInfo.ServiceName, r.Operation.Name, err)
 		return
 	}
@@ -72,13 +72,13 @@ func logRequest(r *request.Request) {
 		// r.HTTPRequest's Body as a NoOpCloser and will not be reset after
 		// read by the HTTP client reader.
 		if err := r.Error; err != nil {
-			awslog.DebugErrorf(r.Context(), &r.Config, logReqErrMsg,
+			awslog.Logf(r.Context(), &r.Config, logReqErrMsg,
 				r.ClientInfo.ServiceName, r.Operation.Name, err)
 			return
 		}
 	}
 
-	awslog.Debugf(r.Context(), &r.Config, logReqMsg,
+	awslog.Logf(r.Context(), &r.Config, logReqMsg,
 		r.ClientInfo.ServiceName, r.Operation.Name, string(b))
 }
 
@@ -93,21 +93,21 @@ var LogHTTPRequestHeaderHandler = request.NamedHandler{
 func logRequestHeader(r *request.Request) {
 	b, err := httputil.DumpRequestOut(r.HTTPRequest, false)
 	if err != nil {
-		awslog.DebugErrorf(r.Context(), &r.Config, logReqErrMsg,
+		awslog.Logf(r.Context(), &r.Config, logReqErrMsg,
 			r.ClientInfo.ServiceName, r.Operation.Name, err)
 		return
 	}
 
-	awslog.Debugf(r.Context(), &r.Config, logReqMsg,
+	awslog.Logf(r.Context(), &r.Config, logReqMsg,
 		r.ClientInfo.ServiceName, r.Operation.Name, string(b))
 }
 
-const logRespMsg = `Response %s/%s Details:
+const logRespMsg = `DEBUG: Response %s/%s Details:
 ---[ RESPONSE ]--------------------------------------
 %s
 -----------------------------------------------------`
 
-const logRespErrMsg = `Response %s/%s:
+const logRespErrMsg = `DEBUG ERROR: Response %s/%s:
 ---[ RESPONSE DUMP ERROR ]-----------------------------
 %s
 -----------------------------------------------------`
@@ -124,7 +124,7 @@ func logResponse(r *request.Request) {
 	lw := &logWriter{r.Config.Logger, bytes.NewBuffer(nil)}
 
 	if r.HTTPResponse == nil {
-		awslog.DebugErrorf(r.Context(), &r.Config, logRespErrMsg,
+		awslog.Logf(r.Context(), &r.Config, logRespErrMsg,
 			r.ClientInfo.ServiceName, r.Operation.Name, "request's HTTPResponse is nil")
 		return
 	}
@@ -140,7 +140,7 @@ func logResponse(r *request.Request) {
 	handlerFn := func(req *request.Request) {
 		b, err := httputil.DumpResponse(req.HTTPResponse, false)
 		if err != nil {
-			awslog.DebugErrorf(req.Context(), &req.Config, logRespErrMsg,
+			awslog.Logf(req.Context(), &req.Config, logRespErrMsg,
 				req.ClientInfo.ServiceName, req.Operation.Name, err)
 			return
 		}
@@ -151,14 +151,14 @@ func logResponse(r *request.Request) {
 		if logBody {
 			body, err := ioutil.ReadAll(lw.buf)
 			if err != nil {
-				awslog.DebugErrorf(req.Context(), &req.Config, logRespErrMsg,
+				awslog.Logf(req.Context(), &req.Config, logRespErrMsg,
 					req.ClientInfo.ServiceName, req.Operation.Name, err)
 			} else {
 				dump += "\n" + string(body)
 			}
 		}
 
-		awslog.Debug(req.Context(), &req.Config, dump)
+		awslog.Log(req.Context(), &req.Config, dump)
 	}
 
 	const handlerName = "awsdk.client.LogResponse.ResponseBody"
@@ -186,11 +186,11 @@ func logResponseHeader(r *request.Request) {
 
 	b, err := httputil.DumpResponse(r.HTTPResponse, false)
 	if err != nil {
-		awslog.DebugErrorf(r.Context(), &r.Config, logRespErrMsg,
+		awslog.Logf(r.Context(), &r.Config, logRespErrMsg,
 			r.ClientInfo.ServiceName, r.Operation.Name, err)
 		return
 	}
 
-	awslog.Debugf(r.Context(), &r.Config, logRespMsg,
+	awslog.Logf(r.Context(), &r.Config, logRespMsg,
 		r.ClientInfo.ServiceName, r.Operation.Name, string(b))
 }

@@ -334,7 +334,7 @@ const opExecuteSql = "ExecuteSql"
 func (c *RDSDataService) ExecuteSqlRequest(input *ExecuteSqlInput) (req *request.Request, output *ExecuteSqlOutput) {
 	msg := "This operation, ExecuteSql, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {

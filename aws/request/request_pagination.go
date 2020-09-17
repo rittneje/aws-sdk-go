@@ -194,7 +194,7 @@ func logDeprecated(r *Request, flag *int32, msg string) {
 		return
 	}
 	if atomic.CompareAndSwapInt32(flag, 0, 1) {
-		awslog.Warn(r.Context(), &r.Config, msg)
+		awslog.Log(r.Context(), &r.Config, msg)
 	}
 }
 

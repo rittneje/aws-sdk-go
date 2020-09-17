@@ -32,7 +32,7 @@ func AddBodyContentMD5Handler(r *request.Request) {
 
 	// if body is not seekable, return
 	if !aws.IsReaderSeekable(r.Body) {
-		awslog.Errorf(r.Context(), &r.Config,
+		awslog.Logf(r.Context(), &r.Config,
 			"Unable to compute Content-MD5 for unseekable body, S3.%s",
 			r.Operation.Name)
 		return

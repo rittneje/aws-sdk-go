@@ -497,7 +497,7 @@ func SignSDKRequestWithCurrentTime(req *request.Request, curTimeFn func() time.T
 	req.LastSignedAt = curTime
 }
 
-const logSignInfoMsg = `Request Signature:
+const logSignInfoMsg = `DEBUG: Request Signature:
 ---[ CANONICAL STRING  ]-----------------------------
 %s
 ---[ STRING TO SIGN ]--------------------------------
@@ -515,9 +515,9 @@ func (v4 *Signer) logSigningInfo(ctx *signingCtx) {
 
 	msg := fmt.Sprintf(logSignInfoMsg, ctx.canonicalString, ctx.stringToSign, signedURLMsg)
 	if v4.ContextLogger != nil {
-		v4.ContextLogger.Debug(requestContext(ctx.Request), msg)
+		v4.ContextLogger.Log(requestContext(ctx.Request), msg)
 	} else if v4.Logger != nil {
-		v4.Logger.Log("DEBUG: " + msg)
+		v4.Logger.Log(msg)
 	} else {
 		// no-op
 	}

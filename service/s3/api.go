@@ -2832,7 +2832,7 @@ const opGetBucketLifecycle = "GetBucketLifecycle"
 func (c *S3) GetBucketLifecycleRequest(input *GetBucketLifecycleInput) (req *request.Request, output *GetBucketLifecycleOutput) {
 	msg := "This operation, GetBucketLifecycle, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {
@@ -3311,7 +3311,7 @@ const opGetBucketNotification = "GetBucketNotification"
 func (c *S3) GetBucketNotificationRequest(input *GetBucketNotificationConfigurationRequest) (req *request.Request, output *NotificationConfigurationDeprecated) {
 	msg := "This operation, GetBucketNotification, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {
@@ -7047,7 +7047,7 @@ const opPutBucketLifecycle = "PutBucketLifecycle"
 func (c *S3) PutBucketLifecycleRequest(input *PutBucketLifecycleInput) (req *request.Request, output *PutBucketLifecycleOutput) {
 	msg := "This operation, PutBucketLifecycle, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {
@@ -7557,7 +7557,7 @@ const opPutBucketNotification = "PutBucketNotification"
 func (c *S3) PutBucketNotificationRequest(input *PutBucketNotificationInput) (req *request.Request, output *PutBucketNotificationOutput) {
 	msg := "This operation, PutBucketNotification, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {

@@ -13,7 +13,6 @@ import (
 	"github.com/aws/aws-sdk-go/aws/client"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/request"
-	"github.com/aws/aws-sdk-go/internal/awslog"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3iface"
 )
@@ -743,7 +742,7 @@ func (u *multiuploader) fail() {
 	}
 	_, err := u.cfg.S3.AbortMultipartUploadWithContext(u.ctx, params, u.cfg.RequestOptions...)
 	if err != nil {
-		logMessage(u.ctx, u.cfg.S3, aws.LogDebug, awslog.DebugErrorf, "failed to abort multipart upload, %v", err)
+		logMessage(u.ctx, u.cfg.S3, aws.LogDebug, "failed to abort multipart upload, %v", err)
 	}
 }
 

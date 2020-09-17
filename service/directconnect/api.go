@@ -127,7 +127,7 @@ const opAllocateConnectionOnInterconnect = "AllocateConnectionOnInterconnect"
 func (c *DirectConnect) AllocateConnectionOnInterconnectRequest(input *AllocateConnectionOnInterconnectInput) (req *request.Request, output *Connection) {
 	msg := "This operation, AllocateConnectionOnInterconnect, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {
@@ -2893,7 +2893,7 @@ const opDescribeConnectionLoa = "DescribeConnectionLoa"
 func (c *DirectConnect) DescribeConnectionLoaRequest(input *DescribeConnectionLoaInput) (req *request.Request, output *DescribeConnectionLoaOutput) {
 	msg := "This operation, DescribeConnectionLoa, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {
@@ -3080,7 +3080,7 @@ const opDescribeConnectionsOnInterconnect = "DescribeConnectionsOnInterconnect"
 func (c *DirectConnect) DescribeConnectionsOnInterconnectRequest(input *DescribeConnectionsOnInterconnectInput) (req *request.Request, output *Connections) {
 	msg := "This operation, DescribeConnectionsOnInterconnect, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {
@@ -3609,7 +3609,7 @@ const opDescribeInterconnectLoa = "DescribeInterconnectLoa"
 func (c *DirectConnect) DescribeInterconnectLoaRequest(input *DescribeInterconnectLoaInput) (req *request.Request, output *DescribeInterconnectLoaOutput) {
 	msg := "This operation, DescribeInterconnectLoa, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {

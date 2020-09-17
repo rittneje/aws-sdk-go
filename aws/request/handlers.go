@@ -283,7 +283,7 @@ func HandlerListLogItem(item HandlerListRunItem) bool {
 	if item.Request.Config.Logger == nil {
 		return true
 	}
-	awslog.Debug(item.Request.Context(), &item.Request.Config, "RequestHandler",
+	awslog.Log(item.Request.Context(), &item.Request.Config, "DEBUG: RequestHandler",
 		item.Index, item.Handler.Name, item.Request.Error)
 
 	return true

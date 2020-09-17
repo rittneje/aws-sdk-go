@@ -169,7 +169,7 @@ func (v2 *signer) Sign() error {
 	return nil
 }
 
-const logSignInfoMsg = `Request Signature:
+const logSignInfoMsg = `DEBUG: Request Signature:
 ---[ STRING TO SIGN ]--------------------------------
 %s
 ---[ SIGNATURE ]-------------------------------------
@@ -179,9 +179,9 @@ const logSignInfoMsg = `Request Signature:
 func (v2 *signer) logSigningInfo() {
 	msg := fmt.Sprintf(logSignInfoMsg, v2.stringToSign, v2.Query.Get("Signature"))
 	if v2.ContextLogger != nil {
-		v2.ContextLogger.Debug(requestContext(v2.Request), msg)
+		v2.ContextLogger.Log(requestContext(v2.Request), msg)
 	} else if v2.Logger != nil {
-		v2.Logger.Log("DEBUG: " + msg)
+		v2.Logger.Log(msg)
 	} else {
 		// no-op
 	}

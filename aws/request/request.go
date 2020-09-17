@@ -382,7 +382,7 @@ func debugLogReqError(r *Request, stage, retryStr string, err error) {
 		return
 	}
 
-	awslog.Debugf(r.Context(), &r.Config, "%s %s/%s failed, %s, error %v",
+	awslog.Logf(r.Context(), &r.Config, "DEBUG: %s %s/%s failed, %s, error %v",
 		stage, r.ClientInfo.ServiceName, r.Operation.Name, retryStr, err)
 }
 
@@ -548,7 +548,7 @@ func (r *Request) Send() error {
 
 func (r *Request) prepareRetry() error {
 	if r.Config.LogLevel.Matches(aws.LogDebugWithRequestRetries) {
-		awslog.Debugf(r.Context(), &r.Config, "Retrying Request %s/%s, attempt %d",
+		awslog.Logf(r.Context(), &r.Config, "DEBUG: Retrying Request %s/%s, attempt %d",
 			r.ClientInfo.ServiceName, r.Operation.Name, r.RetryCount)
 	}
 

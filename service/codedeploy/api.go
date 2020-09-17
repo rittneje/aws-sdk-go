@@ -424,7 +424,7 @@ const opBatchGetDeploymentInstances = "BatchGetDeploymentInstances"
 func (c *CodeDeploy) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymentInstancesInput) (req *request.Request, output *BatchGetDeploymentInstancesOutput) {
 	msg := "This operation, BatchGetDeploymentInstances, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {
@@ -2481,7 +2481,7 @@ const opGetDeploymentInstance = "GetDeploymentInstance"
 func (c *CodeDeploy) GetDeploymentInstanceRequest(input *GetDeploymentInstanceInput) (req *request.Request, output *GetDeploymentInstanceOutput) {
 	msg := "This operation, GetDeploymentInstance, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {
@@ -3365,7 +3365,7 @@ const opListDeploymentInstances = "ListDeploymentInstances"
 func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstancesInput) (req *request.Request, output *ListDeploymentInstancesOutput) {
 	msg := "This operation, ListDeploymentInstances, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {
@@ -4504,7 +4504,7 @@ const opSkipWaitTimeForInstanceTermination = "SkipWaitTimeForInstanceTermination
 func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTimeForInstanceTerminationInput) (req *request.Request, output *SkipWaitTimeForInstanceTerminationOutput) {
 	msg := "This operation, SkipWaitTimeForInstanceTermination, has been deprecated"
 	if c.Client.Config.ContextLogger != nil {
-		c.Client.Config.ContextLogger.Warn(aws.BackgroundContext(), msg)
+		c.Client.Config.ContextLogger.Log(aws.BackgroundContext(), msg)
 	} else if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log(msg)
 	} else {
